@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/us_/bin/python3
 '''db_storage module'''
 from os import getenv
 from models.amenity import Amenity
@@ -8,6 +8,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+from sqlalchemy.dialects.mysql import mysqldb
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 
@@ -77,13 +78,13 @@ class DBStorage:
         self.__session.delete(obj)
 
     def reload(self):
-        ''''''
+        '''reloads data from the database'''
+        Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(bind=self.__engine,
                                        expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
-        Base.metadata.create_all(self.__engine)
 
     def close(self):
         '''Removes the current database session'''
-        self.__session.close()
+        self.__session.remove()
