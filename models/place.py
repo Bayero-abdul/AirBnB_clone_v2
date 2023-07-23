@@ -17,7 +17,8 @@ if models.storage_type == 'db':
                                  String(60),
                                  ForeignKey('amenities.id'),
                                  nullable=False,
-                                 primary_key=True)
+                                 primary_key=True),
+                          mysql_charset="latin1"
                           )
 
 
@@ -25,6 +26,7 @@ class Place(BaseModel, Base):
     """ A place to stay """
     if models.storage_type == 'db':
         __tablename__ = 'places'
+        __table_args__ = ({'mysql_default_charset': 'latin1'})
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
         name = Column(String(128), nullable=False)

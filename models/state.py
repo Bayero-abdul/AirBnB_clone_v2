@@ -14,7 +14,6 @@ class State(BaseModel, Base):
         cities = relationship("City", backref="state")
     else:
         name = ""
-        state_id = ""
 
         @property
         def cities(self):

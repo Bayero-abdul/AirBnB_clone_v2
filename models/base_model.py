@@ -16,6 +16,7 @@ class BaseModel:
     """A base class for all hbnb models"""
 
     if models.storage_type == 'db':
+        __table_args__ = ({'mysql_default_charset': 'latin1'})
         id = Column(String(60), nullable=False, primary_key=True)
         created_at = Column(DateTime,
                             nullable=False,

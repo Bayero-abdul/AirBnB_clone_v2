@@ -10,6 +10,7 @@ class Amenity(BaseModel, Base):
     '''Representation of an Amenity'''
     if models.storage_type == 'db':
         __tablename__ = 'amenities'
+        __table_args__ = ({'mysql_default_charset': 'latin1'})
         name = Column(String(128), nullable=False)
         place_amenities = relationship('Place',
                                        secondary='place_amenity',
