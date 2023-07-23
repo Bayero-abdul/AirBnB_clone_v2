@@ -10,6 +10,12 @@ from models.state import State
 app = Flask(__name__)
 
 
+@app.teardown_appcontext
+def teardown_db():
+    """Closes the database current session"""
+    storage.close()
+
+
 @app.route("/states_list", strict_slashes=False)
 def list_state():
     """Displays list of states"""
